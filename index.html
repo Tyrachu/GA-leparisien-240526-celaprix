@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Parisien Dimanche · « L’école sera mon chantier numéro 1 » · N° 25426 bis</title>
+<style>
+  :root {
+    --lp-blue: #1AA8E5;
+    --lp-blue-dark: #0090D6;
+    --bg-quote: #F4FAFD;
+    --ink-zh: #0A3553;
+    --ink-fr: #1A4E73;
+    --noir: #181818;
+    --gris: #8B8B8B;
+    --gris-fonce: #3B3B3B;
+    --gris-clair: #666;
+    --gris-ligne: #D9D9D9;
+    --bg-annot: #FFF8E1;
+    --orange: #C7842F;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--noir);
+    background: #FFFFFF;
+    line-height: 1.7;
+    -webkit-text-size-adjust: 100%;
+    /* CJK-aware line breaking: keep Chinese punctuation attached to preceding character,
+       prevent French/Latin words from being split from their following Chinese punctuation */
+    line-break: strict;
+    word-break: normal;
+    overflow-wrap: break-word;
+    hanging-punctuation: allow-end;
+  }
+  /* Ensure French inline spans don't trigger split with following Chinese punctuation */
+  em.fr {
+    word-break: keep-all;
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 22px 64px;
+  }
+
+  /* === Sticky control bar === */
+  .ctrl-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #FFFFFFEE;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--gris-ligne);
+    padding: 8px 22px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--gris-clair);
+  }
+  .annot-toggle {
+    background: var(--lp-blue);
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 14px;
+    font-size: 11.5px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    font-family: inherit;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .annot-toggle svg {
+    width: 13px;
+    height: 13px;
+    stroke: currentColor;
+    flex-shrink: 0;
+  }
+  .annot-toggle:hover { background: var(--lp-blue-dark); }
+
+  /* === IG-style header (unified with sister project) === */
+  .ig-head {
+    padding: 24px 0 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--gris-ligne);
+  }
+  .ig-avatar {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    padding: 3px;
+    background: conic-gradient(
+      from 45deg,
+      #F58529 0deg,
+      #DD2A7B 80deg,
+      #8134AF 160deg,
+      #515BD4 220deg,
+      #1AA8E5 290deg,
+      #F58529 360deg
+    );
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .ig-avatar-inner {
+    width: 100%; height: 100%;
+    background: var(--lp-blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: 900;
+    font-size: 26px;
+    color: #FFFFFF;
+    border: 2.5px solid #FFFFFF;
+    padding-bottom: 2px;
+  }
+  .ig-handle {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--noir);
+    letter-spacing: 0.2px;
+  }
+
+  /* === Page title (摘译主标题) === */
+  .page-title {
+    font-family: "Times New Roman", Times, "Songti SC", "STSong", serif;
+    font-size: 40px;
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--noir);
+    text-align: center;
+    margin: 28px auto 8px;
+    max-width: 720px;
+    padding: 0 20px;
+  }
+  .page-title-fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--gris-clair);
+    text-align: center;
+    margin: 0 auto 22px;
+    line-height: 1.4;
+  }
+  @media (max-width: 540px) {
+    .page-title { font-size: 30px; }
+    .page-title-fr { font-size: 13px; }
+  }
+
+  /* === Datestrip === */
+  .datestrip {
+    border-top: 1px solid var(--gris-ligne);
+    border-bottom: 2px solid var(--lp-blue);
+    padding: 9px 0;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--gris-clair);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .datestrip .theme {
+    text-transform: none;
+    letter-spacing: 0.3px;
+    color: var(--lp-blue-dark);
+    font-weight: 700;
+  }
+
+
+  /* === Claude attribution === */
+  .claude-mark {
+    font-size: 11px;
+    color: var(--gris);
+    font-style: italic;
+    padding: 6px 0 0;
+    letter-spacing: 0.3px;
+  }
+
+  /* === TOC === */
+  .toc {
+    margin: 28px 0 36px;
+    background: var(--bg-quote);
+    border-left: 4px solid var(--lp-blue);
+    padding: 18px 20px;
+  }
+  .toc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .toc-title {
+    font-family: "Times New Roman", Times, "Songti SC", serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--ink-zh);
+    letter-spacing: 0.5px;
+  }
+  .toc-rt {
+    font-size: 11.5px;
+    color: var(--gris-clair);
+    letter-spacing: 0.3px;
+  }
+  .toc ol {
+    list-style: none;
+    padding: 0; margin: 0;
+    counter-reset: toc-counter;
+  }
+  .toc ol li {
+    counter-increment: toc-counter;
+    margin: 0;
+    border-bottom: 1px dotted var(--gris-ligne);
+  }
+  .toc ol li:last-child { border-bottom: none; }
+  .toc ol li a {
+    display: block;
+    padding: 10px 8px;
+    color: var(--noir);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: background 0.2s;
+  }
+  .toc ol li a:hover { background: #E8F4FB; }
+  .toc ol li a:active { background: #D6EAF7; }
+  .toc ol li a::before {
+    content: counter(toc-counter, decimal-leading-zero) " ";
+    color: var(--lp-blue);
+    font-weight: 700;
+    margin-right: 8px;
+    font-family: "Times New Roman", serif;
+  }
+  .toc ol li a .toc-fr {
+    display: block;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--gris-clair);
+    margin-top: 2px;
+  }
+
+  /* === Article structure === */
+  article { margin-bottom: 56px; }
+  .rubrique {
+    color: var(--lp-blue-dark);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  h1.titre {
+    font-family: "Times New Roman", Times, "Songti SC", "STSong", serif;
+    font-size: 33px;
+    font-weight: 900;
+    line-height: 1.18;
+    letter-spacing: -0.3px;
+    color: var(--noir);
+    margin: 0 0 10px;
+  }
+  .titre-fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 14.5px;
+    color: var(--gris-clair);
+    margin-bottom: 18px;
+    line-height: 1.35;
+  }
+  .chapo {
+    font-family: "Times New Roman", Times, "Songti SC", serif;
+    font-size: 16.5px;
+    color: var(--gris-fonce);
+    line-height: 1.55;
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+  .signature {
+    font-size: 12px;
+    color: var(--gris-clair);
+    font-style: italic;
+    margin-bottom: 22px;
+    letter-spacing: 0.2px;
+  }
+  h2.intertitre {
+    font-family: "Times New Roman", Times, "Songti SC", serif;
+    font-size: 21px;
+    font-weight: 700;
+    margin: 32px 0 14px;
+    line-height: 1.3;
+    color: var(--noir);
+  }
+  article p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0 0 16px;
+    color: var(--noir);
+  }
+
+  /* === Lead bilingual quote block === */
+  blockquote.lead {
+    background: var(--bg-quote);
+    border-left: 4px solid var(--lp-blue);
+    padding: 18px 20px;
+    margin: 22px 0;
+  }
+  blockquote.lead .zh {
+    font-family: "Times New Roman", Times, "Songti SC", serif;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--ink-zh);
+    margin-bottom: 10px;
+  }
+  blockquote.lead .sep {
+    border-top: 1px dashed #B8D7E8;
+    margin: 10px 0;
+  }
+  blockquote.lead .fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-fr);
+    margin-bottom: 8px;
+  }
+  blockquote.lead .src {
+    font-size: 11.5px;
+    color: var(--gris-clair);
+    letter-spacing: 0.2px;
+  }
+
+  /* === Inline French quote === */
+  .quote-fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    color: var(--ink-fr);
+    background: #F0F8FC;
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 14.5px;
+  }
+  em.fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    color: var(--ink-fr);
+  }
+
+  /* === Annotation system === */
+  .annot {
+    border-bottom: 1px dashed var(--lp-blue);
+    cursor: pointer;
+    position: relative;
+  }
+  .annot sup {
+    color: var(--lp-blue);
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 1px;
+  }
+  .annot-text {
+    display: none;
+    background: var(--bg-annot);
+    border-left: 3px solid var(--orange);
+    padding: 12px 14px;
+    margin: 10px 0 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--gris-fonce);
+    border-radius: 0 3px 3px 0;
+  }
+  .annot-text.show, body.notes-open .annot-text {
+    display: inline-block;
+    vertical-align: top;
+    margin: 6px 0;
+    max-width: 100%;
+  }
+
+  /* === Encadré (sidebar) === */
+  .encadre {
+    background: var(--bg-quote);
+    border-top: 3px solid var(--lp-blue);
+    padding: 16px 18px;
+    margin: 28px 0;
+  }
+  .encadre-tag {
+    color: var(--lp-blue-dark);
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .encadre h3 {
+    font-family: "Times New Roman", Times, "Songti SC", serif;
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    line-height: 1.3;
+  }
+  .encadre .sub {
+    font-style: italic;
+    font-size: 13px;
+    color: var(--gris-clair);
+    margin-bottom: 14px;
+  }
+  .encadre ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    font-size: 14.5px;
+    line-height: 1.65;
+  }
+  .encadre ul li { margin-bottom: 6px; }
+
+  /* === Back to top === */
+  #backtop {
+    position: fixed;
+    bottom: 26px; right: 22px;
+    width: 42px; height: 42px;
+    background: var(--lp-blue);
+    color: #FFFFFF;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    z-index: 90;
+  }
+  #backtop.show { display: flex; }
+
+  /* === Footer === */
+  .footer {
+    margin-top: 64px;
+    padding: 24px 0;
+    border-top: 2px solid var(--lp-blue);
+    font-size: 12.5px;
+    color: var(--gris-clair);
+    line-height: 1.65;
+  }
+  .footer .zh { margin-bottom: 14px; }
+  .footer .sep-line {
+    border: none;
+    border-top: 1px solid var(--gris-ligne);
+    margin: 14px 0;
+    width: 80px;
+  }
+  .footer .fr {
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-size: 12px;
+    color: var(--gris);
+  }
+  .footer .claude-mark-end {
+    margin-top: 18px;
+    font-style: italic;
+    text-align: right;
+    color: var(--gris);
+  }
+
+  @media (max-width: 540px) {
+    .container { padding: 0 16px 56px; }
+    h1.titre { font-size: 27px; }
+    h2.intertitre { font-size: 19px; }
+    article p { font-size: 15.5px; }
+    blockquote.lead { padding: 14px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky control bar -->
+<div class="ctrl-bar">
+  <button class="annot-toggle" id="annotBtn">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+    </svg>
+    <span id="annotBtnLabel">Notes</span>
+  </button>
+</div>
+
+<div class="container">
+
+  <!-- IG-style header -->
+  <div class="ig-head">
+    <div class="ig-avatar"><div class="ig-avatar-inner">P</div></div>
+    <span class="ig-handle">leparisien</span>
+  </div>
+
+  <!-- Page title -->
+  <h1 class="page-title">「教育/学校，我的头号工程」</h1>
+  <div class="page-title-fr">«&nbsp;L’école sera mon chantier numéro 1&nbsp;»</div>
+
+  <!-- Datestrip -->
+  <div class="datestrip">
+    <span>DIMANCHE 24 MAI 2026 &nbsp;·&nbsp; N° 25426 bis</span>
+    <span class="theme">Présidentielle · «&nbsp;L’école sera mon chantier numéro 1&nbsp;» · 原文 P. 2 à 4</span>
+  </div>
+
+  <div class="claude-mark">Claude [Anthropic] 译</div>
+
+  <!-- TOC -->
+  <nav class="toc">
+    <div class="toc-head">
+      <div class="toc-title">本期摘译 · Sommaire</div>
+      <div class="toc-rt">全文阅读约 20 分钟</div>
+    </div>
+    <ol>
+      <li><a href="#a1">
+        Attal 的四大「重头工程」
+        <span class="toc-fr">Les quatre « chantiers capitaux » de Gabriel Attal</span>
+      </a></li>
+      <li><a href="#a2">
+        社论 · 「乡野 Attal」
+        <span class="toc-fr">L’édito : « Attal des champs » par Nicolas Charbonneau</span>
+      </a></li>
+      <li><a href="#a3">
+        Coulisses · 国民议会里那个「让人议论的 fan-club」
+        <span class="toc-fr">À l’Assemblée, un fan-club qui fait jaser</span>
+      </a></li>
+      <li><a href="#a4">
+        Philippe 与 Retailleau:「我爱你… 才怪」
+        <span class="toc-fr">Entre Philippe et Retailleau, « je t’aime… moi non plus »</span>
+      </a></li>
+      <li><a href="#a5">
+        Coulisses · 政治幕后短讯
+        <span class="toc-fr">Indiscrétions politiques</span>
+      </a></li>
+      <li><a href="#a7-elkrief">
+        Point de vue · 校外活动:谁的责任?
+        <span class="toc-fr">Périscolaire : qui est responsable ? · La chronique de Ruth Elkrief</span>
+      </a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ ARTICLE 1 ============ -->
+  <article id="a1">
+    <div class="rubrique">Fait du jour · Politique · Présidentielle 2027</div>
+    <h1 class="titre">Attal 的四大「重头工程」</h1>
+    <div class="titre-fr">Les quatre « chantiers capitaux » de Gabriel Attal</div>
+    <div class="chapo">
+      <strong>独家</strong> · 刚刚宣告参选 Élysée 之后，Renaissance 的掌门人向本报披露其纲领的首批具体举措，并承认与 Édouard Philippe 之间将会是一场「平和的竞争 · <em class="fr">compétition apaisée</em>⁠」。
+    </div>
+    <div class="signature">Thomas Soulié 与 Alison Tassin · 特派 Mur-de-Barrez(Aveyron) · 阅读约 7 分钟</div>
+
+    <p>周五下午，Mur-de-Barrez 镇<span class="annot" data-pop="murdebarrez">市政厅<sup>*</sup></span><div class="annot-text" id="murdebarrez"><strong>Mur-de-Barrez</strong> — Aveyron 省北部一个约 700 居民的小村，位于 Aurillac 与 Laguiole 之间。Attal 选择在这样一个被《Le Parisien》记者形容为「最远离 Macron 念兹在兹的 <em class="fr">start-up nation</em>⁠」的乡野角落宣告参选，显然是一种政治姿态:对接 1995 年 Chirac 在 Corrèze 县下场宣告时所建立的「乡土候选人 · candidat de terroir」叙事模板。</div>二楼，Gabriel Attal 正在手机上翻看宣告参选总统之后涌入的大量讯息，另一只手夹着电子烟。这位 2027 年 Élysée 的新晋角逐者似乎并未因跨过 <span class="annot" data-pop="rubicon">Rubicon<sup>*</sup></span><div class="annot-text" id="rubicon"><strong>Rubicon</strong> · <em class="fr">franchir le Rubicon</em> — 字面是「跨过 Rubicon 河」。典出公元前 49 年 Caesar 率军越过意大利北部的 Rubicon 河,违反罗马共和国禁令进军罗马,从此开启内战。这一渡河自此成为「不可撤回的决断」的代名词。法语政治话语中,<em class="fr">franchir le Rubicon</em> 是宣告参选、做出公开重大决定的固定隐喻;此处尤其贴切 — Attal 此前持续近一年时间在「是否参选」上保持模糊姿态,5 月 24 日 Mur-de-Barrez 之行正是这一悬念的终结点。</div> 而如释重负。他神情专注,已经在思考下一步。</p>
+
+    <p>首先是他的纲领，他向本报独家披露了其整体架构。然后是他第一个竞选口号 ── 之后还会有其他 ── 将在下周六的巴黎集会上首次亮相，这位前总理选定的是「<em class="fr">La force d’agir</em> · 行动的力量」。他也已经开始构思入主 Élysée 后头几周的工作安排:出访 Berlin, 就学校与薪资出台举措…… 37 岁的 Gabriel Attal 已经在规划未来，他下决心要「赢下」这场总统大选。</p>
+
+    <h2 class="intertitre">— 您选择在 Aveyron 的一个小村庄、在民众之间宣告参选。您是新一代的 Chirac 吗?</h2>
+
+    <p><strong>GABRIEL ATTAL</strong>⁠: Jacques Chirac 身上有一种能量，一种:亲近感、真诚和共情，这些长期以来一直打动我。我始终身处一线。在 Matignon 任期内，有些评论员甚至指责我外出太多。我无法想象自己在民众之外的任何地方宣告参选。这是一种冒险，也比在电视演播间里麻烦得多。</p>
+
+    <h2 class="intertitre">— 您在政治上如何定义自己?社民派、进步派、右派、左派?</h2>
+
+    <p>给自己贴个标签、塞进某个分类里，对我来说会更省事。我拒绝这样做，而我也是这场竞选中唯一不向这种省事妥协的人。因为政治分歧带来的更多是分裂而非解决方案。我始终相信<span class="annot" data-pop="depassement">「政治的超越 · <em class="fr">dépassement politique</em>」<sup>*</sup></span><div class="annot-text" id="depassement"><strong>dépassement politique</strong> — Macron 主义 2017 年的核心修辞，字面是「超越政治」,实质指拒绝左右二元光谱、声称在传统党派之上重新组合。Macron 用 <em class="fr">en même temps</em>(「同时」)的语法结构把对立项强行并列。Attal 此处继承这一框架，但措辞从 <em class="fr">en même temps</em> 切换为 <em class="fr">dépassement</em> ── 后者在 2025 年法国政治评论圈已经带有一定的怀疑性反讽色彩，因为它在两届 quinquennat 之后被广泛认为更多是修辞而非现实。</div>⁠。我参选不是为了让右派或左派胜出，而是为了让国家的未来重启。</p>
+
+    <h2 class="intertitre">— 您要改变这套制度吗?</h2>
+
+    <p>几十年以来，我们这套制度不再投资未来，而是把太多资源用于堵当下的窟窿、偿还过去的债务。这正是我想要改变的，因为如今，长此以往，代际鸿沟的风险正在显现。此次参选是我个人漫长历程的延续，我希望重燃希望，既不陷入<span class="annot" data-pop="declinisme">衰退论<sup>*</sup></span><div class="annot-text" id="declinisme"><strong>déclinisme</strong> — 法国 2010 年代以来政治-知识场域的关键诊断，认为法国正陷入不可逆的下滑:经济竞争力、人口、文化影响力、教育水平诸方面同步衰退。代表人物以 Éric Zemmour 为典型，及部分右翼与保守派评论者。Attal 这里同时拒绝衰退论与其反义对 ── 「血与泪」的英雄主义动员叙事 ── 试图把自己定位为务实但不悲观的第三条路。</div>⁠，也不陷入血泪交织的境地。我的目标是重拾让每位法国人能实现自我提升「人人皆可向上」的承诺。</p>
+    <h2 class="intertitre">— 您依然把自己定位为 Macron 主义的继承人吗?</h2>
+
+    <p>我在政府里工作了六年，直到进入 Matignon. 我对自己在各个岗位上做过的事情负责。</p>
+
+    <h2 class="intertitre">— 5 月 30 日您的巴黎集会上会有许多 macronistes……</h2>
+
+    <p>我很高兴自己的行动能凝聚那些认同我价值观的人。但我不是「圣殿的守护者」。这场竞选将会是面孔更新之战。在这场活动上，我希望让一代新的当选者发声，例如 Annecy(Haute-Savoie)的新市长 Antoine Armand, <span class="annot" data-pop="armand"><sup>*</sup></span><div class="annot-text" id="armand"><strong>Antoine Armand</strong> — 2026 年 3 月 Annecy 市长选举中胜出的青年 Renaissance/RE 代表，前财政部长(2024 年 9 月-12 月 Barnier 政府)。Attal 在集会上让他发言，既是代际宣示，也是地方根基宣示。</div>也希望让来自公民社会的人物发声，比如 Lunettes pour tous 公司的创始人 Paul Morlet, 以及还特别邀请到乌克兰议会法乌友好小组主席 Lesia Vasylenko. 此外，我还获得了 1 300 多位市长与地方民选官员的支持。</p>
+
+    <blockquote class="lead">
+      <div class="zh">我不是<span class="annot" data-pop="temple">「圣殿的守护者」<sup>*</sup></span><div class="annot-text" id="temple"><strong>gardien du temple</strong> — 字面「圣殿的守护者」,法语政治评论里指一个体制/思想/遗产的正统守护者，负责维护教义纯度、排斥异端，带有「死守正统、拒绝变革」的隐性贬义。在 Macron 主义内部的语境里，这个表达带有微妙的张力:谁有资格继承 Macron 的衣钵?谁是正统、谁是异端?Attal 用否定句切割自己与这种角色 ── 他要继承，但要带入新人新面孔。这与他后面强调「<em class="fr">renouvellement des visages</em> · 面孔更新」是同一逻辑。</div>⁠(Macron 主义的圣殿守护者)。这场竞选将会是面孔更新之战。</div>
+      <div class="sep"></div>
+      <div class="fr">«&nbsp;Je ne suis pas le gardien du temple [de la macronie]. Cette campagne sera celle du renouvellement des visages.&nbsp;»</div>
+      <div class="src">— Gabriel Attal, Mur-de-Barrez, 2026 年 5 月 22 日</div>
+    </blockquote>
+
+    <h2 class="intertitre">— 同样是前总理的 Édouard Philippe 也是您的对手。他是您的敌手吗?</h2>
+
+    <p>我下场是为了捍卫一份纲领，不是为了点评点评者。我和 Édouard Philippe 之间会存在某种「平和的竞争」，法国人不会原谅我们之间相互开战使得第二轮变成 <strong>RN</strong> 对 <strong>LFI</strong> 的对决。</p>
+
+    <h2 class="intertitre">— 第一轮当天投票箱里会有 Attal 的选票吗?</h2>
+
+    <p>(笑)我要赢下这场总统大选。我下场不是为了见证或施压，而是为了胜出!我会拼上全力。我想捍卫的乐观、正向的纲领，呼应着法国人的期待。</p>
+
+    <h2 class="intertitre">— 您当选总统后，首站出访哪个国家?</h2>
+
+    <p>我在很多领域主张变革，但有些传统需要尊重。和许多总统一样，我会前往 Allemagne, Berlin, 因为<span class="annot" data-pop="couple">「法德发动机 · <em class="fr">couple franco-allemand</em>⁠」<sup>*</sup></span><div class="annot-text" id="couple"><strong>couple franco-allemand</strong> — 法语字面「法德之伴侣」,指 De Gaulle-Adenauer 1963 年《Élysée 条约》之后法德两国在欧洲一体化中扮演的发动机角色。每一任法国总统上任后第一次境外访问惯例去 Berlin(或 Bruxelles 欧盟机构),作为对这一惯例的姿态确认。Attal 此处既维护惯例，也藉机区隔于 Jordan Bardella(RN)所声称的「上任后首访 Bruxelles 去训斥 Commission européenne」的反建制路线。</div>仍是欧洲的纽带。这比去 Bruxelles 训斥 Commission européenne 有用 ── Jordan Bardella 宣称当选后首访就要去那里。</p>
+
+    <h2 class="intertitre">— 您当选总统后，会立刻解散国民议会吗?</h2>
+
+    <p>会。任何一位当选者都会做这个决定。要从这个政治泥潭里走出来!一系列法案会提前准备好，以便快速推进。但是在新国民议会到来之前，显然也要立刻行动，而且这种行动不需要立法。国民教育部就是这种情况 ── 教育是我最重要的一战。所以一当选，我就会就学校出台一系列关键措施。我会以一系列<span class="annot" data-pop="decret">行政命令 · <em class="fr">décrets</em><sup>*</sup></span><div class="annot-text" id="decret"><strong>décret</strong> — 法国行政法中由总统或总理签发的规范性行政文件，无需国会立法即可生效。多用于既有法律的实施细则，但也可以在不抵触法律的领域里直接确立新规则。Attal 此处的策略似乎是:即便新一届 Assemblée 还未产生、即便届时席位结构难料，教育领域的提升学业水平、恢复教师权威、改善校园福祉这些事项，可以通过 décret 路线绕开立法瓶颈率先推进。</div>启动 2027 学年，内容涵盖学业水平提升、教师权威恢复、校园福祉。</p>
+
+    <h2 class="intertitre">— 具体而言?</h2>
+
+    <p>必须重新接续我担任部长时启动的<span class="annot" data-pop="choc">「<em class="fr">choc des savoirs</em> · 知识冲击」<sup>*</sup></span><div class="annot-text" id="choc"><strong>choc des savoirs</strong> — 字面「知识的冲击/震荡」,Attal 任国民教育部长期间(2023 年 7 月-2024 年 1 月)、于 2023 年 12 月公布的教育改革套件。核心措施包括:中学按学业水平分组教学(<em class="fr">groupes de niveau</em>⁠,后改名 <em class="fr">groupes de besoins</em>⁠)、brevet 考试结果与升入 lycée 挂钩、加强基础学科课时。该套件在 Attal 离任后被其继任者 Élisabeth Borne(Bayrou 政府教育部长，2024 年 12 月-2025 年 10 月)部分撤销。Attal 此处宣布要「重新接续」这一项目，可以读作对 Borne 的隐性批评，也可以读作他把 2024 年那段政治动荡叙述为对其个人改革进度的中断。</div>所揭示的雄心，这套改革当时被我的一位继任者(Élisabeth Borne)部分撤销了。我尤其想到:<span class="annot" data-pop="brevet">brevet 考试<sup>*</sup></span><div class="annot-text" id="brevet"><strong>brevet / collège / lycée · 法国学制</strong> — collège(初中，11-15 岁)末年举行 brevet 全国统考；通过后升入 lycée(高中，15-18 岁)，终点是 <em class="fr">baccalauréat</em> 高考。Attal 主张以 brevet 合格作为升 lycée 的硬性门槛。</div>合格作为升入 lycée 的强制条件，以及从 collège 开始就把 AI 整合进所有学科教学。还要继续推进每班学生数的下调，这可以靠人口出生率下降腾出来的财政空间来支撑，这样可以挤出预算余裕、又不削减学校资源。我不会拿学校来省钱。这将是我的第一号工程，而且国民教育部长在政府礼宾排序中将位列第一。</p>
+
+    <h2 class="intertitre">— 您的其他优先项目是什么?</h2>
+
+    <p>我深信我们可以重新成为欧洲第一强国，但前提是要在四个议题上交出成绩，我把这四项称为我们的「重头工程 · <em class="fr">chantiers capitaux</em>⁠」:学校、薪资、边境与 AI. 法国的未来取决于这四根支柱，它们将是我此次竞选与一旦当选之后的四大优先。</p>
+
+    <h2 class="intertitre">— 首先是就业与薪资。Emmanuel Macron 曾承诺充分就业。我们 2027 年到不了。您给自己定一样的目标吗?</h2>
+
+    <p>三十年来，我们从未如此接近过充分就业。但由于<span class="annot" data-pop="dissolution">国民议会的解散<sup>*</sup></span><div class="annot-text" id="dissolution"><strong>la dissolution</strong> — 指 Macron 2024 年 6 月 9 日欧洲议会选举当晚宣告解散国民议会一事。Attal 此前在 Matignon 任总理，事先并未获知此决定，据他自述与全国民众同时通过电视得知。这一事件造成的政治动荡是当前法国分裂格局(NFP-RN-bloc central 三足鼎立、政府不稳)的直接源头。社论作者 Charbonneau 在同期他自己的文章里把这次解散形容为「第五共和国历史上最 baroque 的决定」,可见这一事件在 Attal 阵营叙事里始终被定位为外部强加的不可抗力。</div>⁠,我们走的是反向的路，这对经济和法国劳动者来说显然是一场悲剧。选举次日，就必须重新给企业以可见性，以再次拉低失业率。我的首要优先是薪资 ── 这个词我拒绝拱手让给左派。要走「<span class="annot" data-pop="droitaubrut"><em class="fr">droit au brut</em> · 毛薪直击」<sup>*</sup></span><div class="annot-text" id="droitaubrut"><strong>droit au brut</strong> — Attal 自创的口号，谐音玩弄经典法语短语 <em class="fr">droit au but</em>(直奔目标/直击要害)。「brut」在薪资语境里指「税前/毛额」,与 「net」(净额/到手)相对。这个短语合并了两层意思:① 直奔重点(目标导向)、② 缩小毛薪与净薪之间的差距(也即削减雇员侧社会分摊)。这是经典的右翼/中右政策语言 ── 减税即等于「真实工资上涨」 ── 但裹上了一句容易记的口号皮。中文找不到精确对应的谐音梗，这里用「毛薪直击」尽量保留两层含义。</div>⁠」,从而缩小毛薪与净薪之间的差距。</p>
+
+    <h2 class="intertitre">— 如何做到?</h2>
+
+    <p>这要靠对压在公共账目上的社会支出进行节流、以及我在 Matignon 时已经准备好的失业保险改革。藉「<em class="fr">droit au brut</em>⁠」,我们可以在五年内实现一次史无前例的薪资上涨。</p>
+
+    <h2 class="intertitre">— 您提到边境。要设立移民配额吗?</h2>
+
+    <p>要，因为我们必须选择接收谁、不接收谁。我主张移民的「<span class="annot" data-pop="preftravail">劳动优先 · <em class="fr">préférence travail</em><sup>*</sup></span><div class="annot-text" id="preftravail"><strong>préférence travail</strong> — Attal 此处的新造词，在语法结构上明显回响 RN 的核心口号 <em class="fr">préférence nationale</em>(国家优先，即在就业、住房、社会保障上对法国国籍者优先于外国人)。Attal 把同样的句法骨架挪用过来，但把准入门槛从「国籍」切换为「劳动需求」。这是经典的中间派策略:借用对手的语法格式以争夺议题主导权，但实质内容仍区分于右翼极端。结合后文「<em class="fr">système à points comme au Canada</em>⁠」(加拿大式记分制),实质是以经济需求驱动的移民选别制度。</div>⁠」。社会伙伴将界定经济所需的移民数额，之后这些数额将以配额形式在 Parlement 投票，使用加拿大那样的记分制。</p>
+
+    <h2 class="intertitre">— 关于贩毒问题，您像 Bruno Retailleau 和 Édouard Philippe 那样主张紧急状态吗?</h2>
+
+    <p>我完全认同。当然要打击，但我观察到我们已经拥有欧洲最严苛的法律武器库，结果却不令人满意。</p>
+
+    <h2 class="intertitre">— 关于 AI, 法国已经落后了吗?</h2>
+
+    <p>是的，如果拿我们和美国、中国对比。但我们具备所有条件成为欧洲在这方面的第一国。我会推动一项五年内培训两千万名劳动者的计划。同时，通过在养老金体系里引入一定比例的<span class="annot" data-pop="capitalisation">资本积累成分<sup>*</sup></span><div class="annot-text" id="capitalisation"><strong>capitalisation</strong> — 法国养老金体系长期以来基本上是「<em class="fr">répartition</em> · 现收现付」模式，即在职劳动者缴费即时支付给当前退休者。「<em class="fr">capitalisation</em> · 资本积累」则是另一种逻辑:个人养老储蓄投资于金融资产，退休时按累积本金支取。Attal 此处提议「引入一定比例(<em class="fr">une dose</em>⁠)」的资本积累，既不是全盘私有化，也不是维持现状，而是混合制改革。这一议题在法国是高度敏感的政治雷区 ── 2023 年退休改革引发了规模浩大的社会运动。Attal 把这个议题与创新融资挂钩，试图把养老金改革从「分配公平」议题转化为「投资能力」议题。</div>⁠,我们可以调动私人资金为创新融资。</p>
+
+    <h2 class="intertitre">— 鉴于能源危机可能持续，您会降低燃油增值税吗?</h2>
+
+    <p>国家的财政状况不允许。需要的是一套战略和一份规划。长期看，是电动化。短期看，是有针对性的、临时性的扶助 ── 这也恰好是政府目前的路线。</p>
+
+    <h2 class="intertitre">— 这是否以牺牲环保目标为代价?</h2>
+
+    <p>有些法国人没有不开车的选择。我的指南针是尊重<span class="annot" data-pop="paris-accord">《Paris 协定》<sup>*</sup></span><div class="annot-text" id="paris-accord"><strong><em class="fr">accord de Paris</em> · Paris 协定</strong> — 2015 年 12 月 COP21 在巴黎通过的国际气候协定，目标是把全球升温控制在工业化前水平 +1.5°C 至 2°C 之内。法国作为东道国，将其视为本国气候外交的标志性成就。</div>⁠。在生态议题上，我意识到历届政府的行动没有得到太多认可，但 2017 年以来，确实是有成果的。</p>
+
+    <h2 class="intertitre">— 您主张 GPA 合法化吗?</h2>
+
+    <p>我的立场一贯：我说过，这一辩论一直是存在的，不应被回避。同时也要记住，在所有这些关乎个人私密领域的生物伦理议题上 ── 有时涉及非常个人的信念，或归结于精神信仰，或诉诸于哲学观念 ── 因此，(在此类议题上)所有政党都已实行<span class="annot" data-pop="liberte-vote">「投票自由」原则<sup>*</sup></span><div class="annot-text" id="liberte-vote"><strong>liberté de vote · 投票自由</strong> — 法国议会政治中的制度术语，指议员在特定议题上可不受党纪(<em class="fr">discipline de parti</em>)约束按个人良知投票。通常适用于关乎个人良知的议题:生物伦理(PMA, GPA, 安乐死)、道德议题(2013 年同性婚姻法案)、涉及宗教或哲学信念的法案。Attal 此处援引这一传统，本质是把 GPA 议题从「政党立场题」降格为「个人良知题」 ── 既承认辩论存在，又把表态责任从党组织转移到议员个人，回避了对 GPA 本身的明确肯定或否定。</div>⁠。</p>
+
+    <h2 class="intertitre">— 现在您正式参选了，您会卸下 Renaissance 党魁与国民议会 EPR 党团主席的职务吗?</h2>
+
+    <p>我目前看不出有任何理由放下这些职务。但等到竞选进入更密集的阶段，我是否需要全身心投入?很可能会。</p>
+    <div class="encadre">
+      <div class="encadre-tag">本期报道当日 · L’événement du jour</div>
+      <h3>Attal 纲领的四根支柱</h3>
+      <div class="sub">原报道所披露的具体举措 ── 由 Attal 本人当场向 Le Parisien 记者陈述</div>
+      <ul>
+        <li><strong>学校 · École</strong> ── 上任即以 décret 启动 2027 学年改革;brevet 合格作为升入 lycée 的强制门槛;AI 自 collège 起整合进所有学科;每班学生数继续下调;Éducation 部长升至礼宾排序首位。</li>
+        <li><strong>薪资 · Salaires</strong> ── 「<em class="fr">droit au brut</em>⁠」口号，通过失业保险改革与社会支出节流，目标是五年内实现「史无前例」的薪资上涨。</li>
+        <li><strong>边境 · Frontières</strong> ── 加拿大式记分制移民配额，以经济部门「劳动需求」为门槛，由社会伙伴界定数额、由 Parlement 投票通过。</li>
+        <li><strong>AI · Intelligence artificielle</strong> ── 五年内培训两千万劳动者;通过养老金体系引入一定比例资本积累，撬动私人资金为创新融资。</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- ============ ARTICLE 2 ============ -->
+  <article id="a2">
+    <div class="rubrique">L’édito · Nicolas Charbonneau</div>
+    <h1 class="titre">「乡野 Attal」</h1>
+    <div class="titre-fr">« Attal des champs »</div>
+    <div class="signature">Nicolas Charbonneau · 编辑部总监 · 阅读约 1 分钟</div>
+
+    <p>Mur-de-Barrez ── 一座钟楼、几面法国国旗、700 户好奇的居民，看着这位前总理在 Pentecôte 长周末前夕、在 Aurillac 与 Laguiole 之间的这个角落落脚。Gabriel Attal 为什么选了 Aveyron 腹地的这个村庄?谜!除非这样解释:很难再找到一个比这里更远离 Emmanuel Macron 所钟情的「<em class="fr">start-up nation</em>⁠」的地方。Attal 与 Macron 这两人之间的关系性质，自 Attal 在 Matignon 上、并与所有人同时得知「<span class="annot" data-pop="diss2">解散议会<sup>*</sup></span><div class="annot-text" id="diss2"><strong>la dissolution</strong> — Charbonneau 在这里把 2024 年 6 月解散议会形容为「第五共和国历史上最 <em class="fr">baroque</em> 的决定」。<em class="fr">baroque</em> 一词在法语政评里偏向「离奇、出人意表、风格过度」的复合贬义，显然不是肯定。此处也明确指出 Attal 是「与所有人同时」(<em class="fr">en même temps que tout le monde</em>⁠)得知的 ── 这是一个微妙的措辞:既复用了 Macron 的标志短语 <em class="fr">en même temps</em>⁠,又借此凸显 Attal 当时作为总理被排除在决策之外的尴尬。</div> ── 第五共和国历史上最 baroque 的决定」这一刻起，大家都已了然于心。</p>
+
+    <p>Mur-de-Barrez, 这有点像是 Macron 在路上把它忘掉的那个法国 ── 那个会在 2027 年为具体方案、为快速有效的措施投票、而不是为宏大叙事或晦涩的「<span class="annot" data-pop="usine">煤气厂工程<sup>*</sup></span><div class="annot-text" id="usine"><strong>usine à gaz</strong> — 法语成语，字面「煤气厂」,引申指过度复杂、笨重、运转吃力的体系或方案 ── 通常带贬义，暗示「设计得越精巧反而越没用」。常用于批评公共政策、行政程序、税制改革等。Charbonneau 在这里将其与「宏大叙事」并列，显然在塑造对 Macron 风格的隐含批评 ── 即「话很多、机器很大、但不解决具体问题」。</div>⁠」投票的那个法国。要付诸行动，既不许下空头承诺、也要有勇气。Gabriel Attal 与 Édouard Philippe 一样，将面对一项沉重的任务:既要与一份打上「<span class="annot" data-pop="cracher">放弃印记<sup>*</sup></span><div class="annot-text" id="cracher"><strong>cracher dans la soupe</strong> — 字面「往汤里吐口水」,法语成语指忘恩负义、背叛自己所受惠的体制或恩主。Charbonneau 在这里指出 Attal 与 Philippe 都面临两难:要与 Macron 两届任期内未能落实的改革(<em class="fr">le sceau du renoncement</em> · 放弃的印记)拉开距离，但又不能显得在「往汤里吐口水」── 因为他们都是 Macron 政府的前总理，自己也是这份遗产的一部分。这是经典的继承者悖论。</div>⁠」、未能在两届 quinquennat 完成的改革账单划清界限，又不能让人觉得自己在「往汤里吐口水」。</p>
+
+    <p>这也涉及他的形象。要让人忘记「<span class="annot" data-pop="villechamps">城里人 Attal<sup>*</sup></span><div class="annot-text" id="villechamps"><strong>« Attal des villes » / « Attal des champs »</strong> — 这一对说法直接戏仿 La Fontaine 寓言《Rat des villes et rat des champs》(《城市鼠与乡村鼠》),也是法国政治传播学中的一个经典操作:把一位被认为过于巴黎、过于精英的候选人，通过乡野场景重新定位为「亲民/接地气」候选人。Chirac 在 Corrèze 的形象塑造是这一传统的范本。Charbonneau 在这里用半讽半同情的笔触指出:Attal 要进行同样的形象转换。</div>⁠」,他将不得不上演「乡野 Attal」、跑遍整个法国 ── 这正是 2019 年公民大辩论时为他赢得过一些好评的事。但从那以来，法国人的士气塌陷了，在一个村子里分食一份 <span class="annot" data-pop="aligot"><em class="fr">aligot</em><sup>*</sup></span><div class="annot-text" id="aligot"><strong>aligot</strong> — Aveyron 和 Aubrac 地区的传统菜，用土豆泥与 tomme fraîche(新鲜未熟成奶酪)拌融、拉出长长的丝线状黏稠质地。被视为法国乡村美食与社群聚餐的图腾性符号。Charbonneau 在这里把「分食一份 aligot」当作「乡野候选人姿态」的浓缩意象 ── 但紧接着否定其足够性:仅靠形象转换不足以恢复法国人的士气。这一句的反讽分量很重 ── 它既承认这种政治姿态的真实份量，又质疑它的当前效力。</div>已经不够。Gabriel Attal 将必须如他自己反复强调的那样，「拼上自己的所有内脏 · <em class="fr">y mettre toutes ses tripes</em>⁠」,以避免被他最尖锐的批评者经常扣上的那顶「<em class="fr">coup de com</em> · 公关秀」帽子。</p>
+
+    <blockquote class="lead">
+      <div class="zh">我参选不是为了见证或施加影响，而是为了赢得胜利！我将倾尽全力。</div>
+      <div class="sep"></div>
+      <div class="fr">«&nbsp;Je ne me lance pas pour témoigner ou peser, mais pour gagner&nbsp;! Je vais y mettre toutes mes tripes.&nbsp;»</div>
+      <div class="src">— Gabriel Attal, 5 月 22 日 Mur-de-Barrez 专访</div>
+    </blockquote>
+
+  </article>
+
+  <!-- ============ ARTICLE 3 (NEW) ============ -->
+  <!-- ============ ARTICLE 4: fan-club ============ -->
+  <article id="a3">
+    <div class="rubrique">Politique · Coulisses</div>
+    <h1 class="titre">国民议会里那个「让人议论的 fan-club」</h1>
+    <div class="titre-fr">À l’Assemblée, un fan-club qui fait jaser</div>
+    <div class="chapo">Gabriel Attal 可以倚靠 Ensemble pour la République(EPR)党团内几位议员的支持。但这种内圈紧密的结构，在党团内部也有人皱眉头。</div>
+    <div class="signature">Ludwig Gallet 与 V. D. · 阅读约 2 分钟</div>
+
+    <p>2007 年，Nadine Morano 当年只能给 Nicolas Sarkozy 挑出一个毛病:「他吃太多巧克力。」历史显然有点重演。十九年后，周五陪同 Gabriel Attal 在 Aveyron 宣告参选的女议员 Prisca Thevenot, 同样找不出自己阵营领袖任何毛病。只有一处例外:「他不会拒绝麦当劳。」</p>
+
+    <p>这位 Renaissance 党魁喜欢身边有一支贴身护卫队。这种格局甚至在国民议会的座席分布上都看得出来。在 267 号座席左侧，坐着 Guillaume Kasbarian 议员。前部长 Marie Lebec 和 Anne Genetet 也在主君近旁，Paul Midy 同样靠近。而这位前总理的后排?Julie Delpech 与 Prisca Thevenot. Gabriel Attal 对 Thevenot 从不吝赞美。她已成为他的<span class="annot" data-pop="porteflingue">主要「<em class="fr">porte-flingues</em>⁠」<sup>*</sup></span><div class="annot-text" id="porteflingue"><strong>porte-flingues</strong> — 法语字面「持枪手 / 枪手扈从」,黑帮俚语原指帮派老大的贴身保镖，在政治新闻语境里被广泛挪用，指那些在媒体上系统性出面为某位政治领袖辩护、攻击对手、上电视前线打头阵的议员。这是一种半亲昵半讽刺的标签:既承认其忠诚与战斗力，也暗示其角色的工具化与暴力色彩。法国政治评论里使用频率很高，英语里没有完全对应的词。中文「打手」过重，「发言人」过中性，这里用法语原文保留并加注。</div>之一 ── 这类议员在领袖的利益受到挑战时，会系统性地冲到前线。</p>
+
+    <h2 class="intertitre">「我们成了朋友」</h2>
+
+    <p>「我和 Franck Riester 几乎每天都说话，而且经常聊政治以外的话题，」Prisca Thevenot 这样讲。「我们周五晚上一起从 Aveyron 回来，如果我周六早上没有早班节目，我们还会一起去喝一杯。我们成了朋友。」</p>
+
+    <p>Pieyre-Alexandre Anglade 则更愿意强调他与 Renaissance 党魁之间的代际亲近。他们的故事始于十年前他们在 Palais-Bourbon 认识的时候。但更主要的是建立在上一届欧洲议会选举期间打下的基础上:当时 Anglade 是候选人 Valérie Hayer 竞选团队的负责人。Gabriel Attal 当时身在 Matignon, 但密切关注这一战局。</p>
+
+    <p>话虽如此，这支「<span class="annot" data-pop="attaliste">attalistes 议员队伍<sup>*</sup></span><div class="annot-text" id="attaliste"><strong>attaliste</strong> — 政治新闻新造词，指那些以 Gabriel Attal 为效忠对象、其政治轨迹与 Attal 紧密绑定的议员或党内人物。法国政评的「人名 + -iste」构词法非常活跃(<em class="fr">macroniste, sarkozyste, philippiste, mélenchoniste</em>⁠),其指认强度从单纯的支持者到核心圈成员不等。称某人为「attaliste」既肯定其忠诚，也暗示其政治命运与 Attal 个人命运捆绑 ── 因此这个标签在党团内部本身就带有派系色彩，可以是中性也可以是贬义，取决于说话者。</div>⁠」并不总能赢得大家一致赞同。「过于宗派，」有人说。一位党团主席指出:「Attal 在解散议会之后做的事情很有力。他重新拿下了党、把所有人都灭了一遍、把自己的人安插进来、坐上了一座金山。」</p>
+
+    <h2 class="intertitre">「Gabriel 长得帅、Gabriel 聪明……」</h2>
+
+    <p>另一些人在提到某些议员时只会翻白眼。「这是一个分层的粉丝俱乐部，」中间阵营内一位重量级人物嘲讽道。「有狂热粉丝。在他们那儿，就是 Gabriel 长得帅、Gabriel 聪明、Gabriel 厉害。然后还有一些更动脑筋的人，他们在 Gabriel 身上看到的是战术利益。比如 Pierre Cazeneuve, 比如 Paul Midy. 」党团内部还流传着一种说法:在预算案审议期间风头甚劲、目前每周一晚上在 Matignon 代替 Gabriel Attal 出席大多数会议的 Paul Midy, 有可能在适当时机接过他在国民议会党团的主席职位。</p>
+
+    <p>「你有死忠粉，然后还有其他人 ── 他们不一定挑战 Attal, 但更多是一种求生反射，」一位 Renaissance 议员分析道。「有些人很清醒，知道经过十年 macronisme 之后，大家想要的是别的东西。」</p>
+  </article>
+
+  <!-- ============ ARTICLE 5: Philippe-Retailleau ============ -->
+  <article id="a4">
+    <div class="rubrique">Politique · Présidentielle 2027</div>
+    <h1 class="titre">Philippe 与 Retailleau:「我爱你… 才怪」</h1>
+    <div class="titre-fr">Entre Philippe et Retailleau, « je t’aime… moi non plus »</div>
+    <div class="chapo">虽然名义上是盟友，Gabriel Attal 的两位对手已经开始相互<span class="annot" data-pop="egratigner">「划痕」<sup>*</sup></span><div class="annot-text" id="egratigner"><strong>s’égratigner</strong> — 法语动词字面「相互划伤(指甲挠出小口)」,引申为政治竞争中的「相互留小伤、放小话」,程度比 <em class="fr">s’attaquer</em>(攻击)轻、比 <em class="fr">se chamailler</em>(口角)重，接近中文「过招/暗刺/留划痕」。原标题套用 Serge Gainsbourg 1969 年与 Jane Birkin 合录的著名情歌《Je t’aime… moi non plus》── 一首关于爱与拒绝并存的暧昧名作。把它套在两位右翼/中右总统候选人之间，既有反讽，也精准:他们之间确实是「盟友又对手」「彼此欣赏又彼此防备」。</div>⁠,争夺「右翼天然候选人」的定位。</div>
+    <div class="signature">Thomas Soulié 与 Quentin Laurent · 阅读约 3 分钟</div>
+
+    <p>自从 3 月 22 日重新当选 Le Havre(Seine-Maritime)市长以来，Édouard Philippe 已经会见了许多 LR 民选官员。其中有:Laurent Wauquiez, Valérie Pécresse, Jean-François Copé 与 Michèle Tabarot. 但没有 LR 党魁本人。「Bruno Retailleau 没有要求见 Édouard, 」一位 philippiste 试图这样辩解。反过来似乎也成立。</p>
+
+    <p>两人都比 Gabriel Attal 更早下场，而他们已经定下了这场总统大选预热阶段的基调:<span class="annot" data-pop="fleurets">「点钝剑 · <em class="fr">à fleurets mouchetés</em>⁠」<sup>*</sup></span><div class="annot-text" id="fleurets"><strong>à fleurets mouchetés</strong> — 法语成语，字面「以包了头的花剑」── 击剑训练用的花剑剑尖会包一个软套(<em class="fr">moucheton</em>⁠),用于减伤，使得击中对手时不致流血。引申指「礼貌地、克制地、不见血地交锋」,通常用于描述上流社会、外交场合或政治竞争中那种「表面客气、暗中过招」的状态。这个表达带有一定的反讽:对手依然是对手，只是彼此都还戴着「假装这只是练习」的面纱。中文最近的对应大概是「点到为止」或「过招但留余地」。</div>⁠。然而，他们之间是有交情、爱聊天的、而且很久了。就在几个月前，还流传着两人组「<em class="fr">ticket</em>⁠」搭档参选的传闻。这个「双人组」的想法 ── Retailleau 阵营称之为「<em class="fr">fantasme</em> · 一厢情愿」── 看起来已经不在议事日程上。进入竞选状态后，两位候选人不再彼此手下留情。</p>
+
+    <h2 class="intertitre">Nice 事件，紧张的源头</h2>
+
+    <p>Vendéen(指 Retailleau, Vendée 出身)是第一个出手的。市政选举之后，他在《Le Figaro》上理论道:「一个 macroniste 候选人不可能当选共和国总统。」目标是谁?是 Le Havre 那一位 ── Macron 政府任内当了三年总理。一个月后再来一次，这次是在本报版面上:「选民会向<span class="annot" data-pop="emememp">『同时论 · <em class="fr">en même temps</em>』<sup>*</sup></span><div class="annot-text" id="emememp"><strong>en même temps</strong> — Emmanuel Macron 2017 年竞选期间的标志性语法结构。Macron 反复用这个连词把左右两侧的政策主张并列，声称同时拥抱市场自由与社会保护、企业精神与生态责任、欧洲一体化与国家主权。这一表达在 2017 年作为「超越左右」的修辞武器极为成功，但在两届 quinquennat 之后被广泛解读为「左右摇摆/无原则中间主义」的代名词，带有显著的贬义。Retailleau 在这里把 Philippe(Macron 政府首任总理)归类为「<em class="fr">en même temps</em> 的工匠」,等于把他与 Macron 主义已经损耗的政治资本绑在一起。</div>的工匠们追究责任，」Bruno Retailleau 强调。「十年之后，一页应该翻过去。」</p>
+
+    <p>Édouard Philippe 当然注意到了同行 LR 党魁的语气变化。「他对我们扔小石子，因为他想存在感，」一位 Horizons 干部断言。「我们不怪他。」真的吗?5 月 10 日 Horizons 民选官员在 Reims(Marne)集会时，有几下「划痕」似乎在证明反面。</p>
+
+    <p>在一段一个多小时的演讲里，Horizons 党魁只点了前内政部长一次名，但暗指更多。先是贩毒议题:「我 2025 年 12 月 8 日就提议过设立紧急状态。…… 之后有些人重新拿起了这个主意。我推断这主意是好的。不要被『著作权』迷住。」紧接着，他又把另一项措施的「父亲身份」收归己有:「<em class="fr">dénonciation de l’accord franco-algérien</em> · 废除法国-阿尔及利亚协定」。当 Horizons 党魁宣称「永远不要轻率参选」、或抨击「那些自称是真正右派的人」时，会场里有些客人眼角一挑。</p>
+
+    <p>「这是竞选，这是政治游戏，」Horizons 发言人 Arnaud Péricard 淡化处理。代价可能是僵持的风险。「在 Nice 市政选举期间，Bruno Retailleau 拒绝在 Christian Estrosi(Horizons)与 Éric Ciotti(UDR)之间选边。我们这边，没有搞过那种『可耻的结盟 · <em class="fr">union honteuse</em>』,」Édouard Philippe 在 Reims 这样喊。又是一次铲球。</p>
+
+    <p>这远不足以安抚已经进入战斗状态的 Retailleau 阵营。「Philippe 身上有一种花花公子气、一种抽离、一种冷淡，」一位参议员近圈人物开火。「我们别无选择，只能强调彼此的差异。这是一根线，我们必须拉紧，但永远不能拉断。」</p>
+
+    <p>LR 团队指出了应避免的陷阱:既不能越过红线、以免损害未来可能的重新靠拢，又要标出自己的差异。据他周围人说，Bruno Retailleau「准备好承担一切风险」── 在这场竞选里，在 RN 与中间阵营之间找到自己的位置本身就是一项政治挑战。</p>
+
+    <h2 class="intertitre">Le Havre 市长在民调中遥遥领先</h2>
+
+    <p>「小心别走太远，」一位 macroniste 议员警告。「他们俩在第一轮正面对决的剧本是危险的，会通往一场 Bardella 对 Mélenchon 的第二轮。」</p>
+
+    <p>就目前而言，在民调里，Édouard Philippe 在比他年长十岁的对手身上拉开了距离。在最新的 Ifop 民调(为《Paris Match》所做)里，Horizons 候选人是法国人最喜欢的政治人物第三位(支持率 49%),而 Bruno Retailleau 被甩到第 24 位(36%)。Gabriel Attal 居第 9 位(43%)。</p>
+
+    <p>LR 的领导人给自己留到秋天来打破这些预测。Philippe 阵营认为 Bruno Retailleau 到时候会弃赛。在那之前?<strong>LR</strong> 二号人物 François-Xavier Bellamy 建议他的党魁与 Édouard Philippe 进行辩论。「但你怎么做得到，既辩论又不太用力打他?」一位 LR 高层担忧地说。线拉得太用力，会断的。</p>
+
+    <blockquote class="lead">
+      <div class="zh">我们别无选择，只能强调彼此的差异。这是一根线，我们必须拉紧，但永远不能拉断。</div>
+      <div class="sep"></div>
+      <div class="fr">«&nbsp;On n’a pas d’autre choix que d’insister sur nos différences. C’est un fil qu’on doit tendre, sans jamais le couper.&nbsp;»</div>
+      <div class="src">— 一位 Bruno Retailleau 的近圈人物</div>
+    </blockquote>
+  </article>
+
+  <!-- ============ ARTICLE 6: Coulisses ============ -->
+  <article id="a5">
+    <div class="rubrique">Coulisses · Indiscrétions</div>
+    <h1 class="titre">政治幕后短讯</h1>
+    <div class="titre-fr">Indiscrétions politiques</div>
+    <div class="signature">本报编辑部 · 阅读约 2 分钟</div>
+
+    <h2 class="intertitre">书 · Élisabeth Borne 的扑街</h2>
+    <p>「这不能算民调，」Élisabeth Borne 一位身边人这样缓颊。她虽然按她自己的话说想在 2027 年的视野里「<em class="fr">peser</em> · 有分量」,但围绕这位前总理可能参选的好奇心，目前还没有跨过书店的门槛。她的新书《<em class="fr">Réveillons-nous !</em> · 我们醒醒吧!》(Robert Laffont 出版)5 月 7 日上架，销量甚至还没到 300 本。</p>
+
+    <h2 class="intertitre">议会 · Laurent Nuñez 状态正盛</h2>
+    <p>Laurent Nuñez 度过了一个不错的星期!周二，这位内政部长成功在 Sénat 让其反对扰乱公共秩序行为的 <em class="fr">loi Ripost</em> 法案获得通过。罕见地，议席甚至起立为他鼓掌。次日，同一议院让政府得以通过 <span class="annot" data-pop="ordonnance">ordonnances<sup>*</sup></span><div class="annot-text" id="ordonnance"><strong>ordonnance</strong> — 法国宪法第 38 条规定的「授权立法」工具:政府经国会授权后，可在原属国会立法范畴的领域直接发布规范文件。常用于快速转化欧盟指令进入法国法律体系。与 <em class="fr">décret</em>(行政命令，实施既有法律的细则)的核心区别是:<em class="fr">ordonnance</em> 让政府临时获得立法权,必须在限期内由国会通过「批准法案」(<em class="fr">loi de ratification</em>)确认,否则失效。</div>将欧洲移民与庇护协定的内容转换进法国法律。还是同一天，延长危险无证外国人行政羁押期限的 <em class="fr">proposition de loi Rodwell</em> 也获通过。对 Beauvau(内政部所在地的代称)的主人而言，这是一次漂亮的星象对齐。「他现在正在状态上，」一位顾问评价。唯一的阴影:由于立法日程拥堵，Sébastien Lecornu 决定在夏季之前不再排入 Nuñez 本应同样推动的市镇警察法案。</p>
+
+    <h2 class="intertitre">「心声」 · Jean-Philippe Tanguy 与他的 8 000 位白马王子</h2>
+    <p>呼声并非石沉大海。4 月 13 日做客 France Inter, Jean-Philippe Tanguy 评论了《Paris Match》头版正式公开的 Jordan Bardella 与 Bourbon des Deux-Siciles 王室 Maria-Carolina 公主的恋情。他认为这属于「<em class="fr">sujet de vie privée</em> · 私生活议题」。接着抛出一句意外告白:「我也很想认识一位王子。你们认识哪一位吗?」── 这位 Somme 省 RN 议员的邮箱因此收到 8 000 多条来信。</p>
+
+    <h2 class="intertitre">La Ciotat · Jean-Pierre Farandou 要多打一份工</h2>
+    <p>尽管手上沉甸甸的卷宗已经够多 ── 在劳动与团结部、又是政府第四号人物、又有计划为总统大选铺一份「<em class="fr">new deal</em>⁠」 ── Jean-Pierre Farandou 似乎周末有点闷。这位部长刚刚接下了一家 Cese(经济、社会与环境理事会)分会的主席职务，地点是他妻子家乡所在的 La Ciotat 镇(Bouches-du-Rhône)。「是市长向我提议的。我和六十多位居民一起讨论生态、交通和其他议题。这很吸引人，」他私下说。多干活，是的，但工资还是原来的:这份新职务，他是<strong>义务</strong>担任的。</p>
+  </article>
+
+  <!-- ============ ARTICLE 7 (NEW): Elkrief Périscolaire ============ -->
+  <article id="a7-elkrief">
+    <div class="rubrique">Actu · Point de vue · La chronique de Ruth Elkrief</div>
+    <h1 class="titre">校外活动:谁的责任?</h1>
+    <div class="titre-fr">Périscolaire : qui est responsable ?</div>
+    <div class="chapo">Paris 市政当局多年来对幼儿园与小学校外活动指导员系统性性侵儿童的举报置之不理。十一年的无作为、转岗规避，如今司法机关启动 110 所机构的调查 ── 但政治问责为何缺席?</div>
+    <div class="signature">Ruth Elkrief · 阅读约 3 分钟</div>
+
+    <p>我们是怎么把这么一桩巨大的丑闻漏掉的?那些被仓促雇佣的<span class="annot" data-pop="periscolaire">校外活动指导员 · <em class="fr">animateurs périscolaires</em><sup>*</sup></span><div class="annot-text" id="periscolaire"><strong>périscolaire</strong> — 字面「围绕在学校周围」,法国教育制度术语，指上下学时段之外、由市镇(commune)组织的儿童活动:上学前接送、午间用餐看管、放学后看管至家长接走、周三半天活动等。负责执行的人员是 <em class="fr">animateurs</em>(活动指导员),由市镇直接雇用或外包，资格门槛较低(主要是 BAFA 即青年活动证书)。这一岗位的招聘速度与背景核查在多数市镇都是结构性薄弱环节 ── Paris 案的核心问题正是「<em class="fr">à la va-vite</em> · 仓促招聘」加上举报后只是调岗而不真正排查。<br><br>关于中译选择:本译稿统一用「校外活动 / 校外活动指导员」对应 <em class="fr">périscolaire / animateur périscolaire</em>⁠。严格说，法国 <em class="fr">périscolaire</em> 是「学校时段周边」(时间概念，涵盖上学前接送 + 午餐看管 + 放学托管 + 周三半天活动等),而中文「校外」字面偏「校园外」(off-campus, 空间概念)。学界报道法国教育制度时也有「学校延时活动」「学校课外服务」的译法，后者更接近原义，但「校外活动」在中文新闻里更通行，因此保留。中国大陆近年的「课后服务」政策(2017 年起)与 <em class="fr">périscolaire</em> 有重叠但不完全对应 ── 中国「课后服务」主要指放学后看管，而 <em class="fr">périscolaire</em> 涵盖一整天学校时段周边。</div>对幼儿园或小学的孩子犯下了过错、有时是罪行。臀部、性器官猥亵、性暴露行为、对不满 15 岁的孩子 ── 有时仅有两三岁 ── 更明确的攻击。整个整个家庭的人生因此破碎，而我们没有听见。为什么这没有成为一桩全国性大事、所有人共同关心的事?我们集体漏掉了什么?</p>
+
+    <p>首先，要从媒体的自我批评开始。是的，《Cash Investigation》<span class="annot" data-pop="cash"><sup>*</sup></span><div class="annot-text" id="cash"><strong>Cash Investigation</strong> — France 2 周末黄金档调查报道节目，Élise Lucet 主持，长期以来法国最具影响力的电视调查节目之一。节目专门做体制性问题的深度调查，目标对象既包括大企业(如食品、能源)也包括公共部门(如教育、医疗)。Elkrief 在这里说「是的，有过一期 Cash Investigation 揭露过」── 这种「是的……是的……」的反复句式，既承认确实有过零星调查报道，也强调它们没有引发应有的全国性后续，即一种「事先有过预警，但媒体场域没有跟进放大」的自责。</div>有过一期专题，把这些可怕的行为公之于众。是的，如今我们《Le Parisien》同事 Victoire Haffreingue-Moulart 出版了一本书《<em class="fr">Les Rois du silence</em> · 沉默之王》。她是最早抓住这桩丑闻的人之一。是的，这里那里也零星出现过一些文章，尤其是在 2025 年 11 月、第一批举报浮出水面的时候。</p>
+
+    <p>但是，当头版头条铺天盖地报道<span class="annot" data-pop="betharram">Bétharram 学校虐待事件<sup>*</sup></span><div class="annot-text" id="betharram"><strong>Bétharram</strong> — Notre-Dame de Bétharram, 位于法国西南 Pyrénées-Atlantiques 省的天主教住宿学校。2025 年初法媒爆出该校 1950 年代至 2000 年代发生过大规模虐待与性侵儿童丑闻，数千名前学生作证。事件一度成为法国头版头条数周。François Bayrou 当时是 Premier ministre(2024 年 12 月 13 日-2025 年 9 月 9 日，因 vote de confiance 9 月 8 日 364:194 未过而辞职 ── 第五共和国首次因 vote de confiance 而倒台的政府，由 Sébastien Lecornu 接任),其女儿曾在该校就读，因此他的「是否知情」「为何未提及」反复被在野党拿来追究，演变为针对其个人的政治攻势。Elkrief 此处的批评是:政治圈用 Bétharram(陈年旧案)做政治算账的工具，反而把同时在 Paris 当下正在发生的 périscolaire 丑闻挤出了公共视野。</div> ── 那是发生在 1950 至 2000 年代的事 ── 与此相反，Paris 校外活动制度里每天在我们眼皮底下发生的丑闻，却没有任何后续跟进。针对当时的总理 François Bayrou 进行政治清算，比 Paris 幼儿园孩子们的健康更重要!</p>
+
+    <p>Paris 检察长 Laure Beccuau 本周初宣布，对 84 所幼儿园、20 所小学和大约十所托儿所启动调查。即首都约 500 所机构里的 110 所。本周，VIIe 区多所学校发生 16 次拘押，3 人被起诉，13 人暂获释，44 名儿童由心理学家与司法官听证。一切都在加速，但为什么要拖到这么晚?</p>
+
+    <p>早在 2015 年 4 月 14 日，VIe 区市长 Jean-Pierre Lecoq 就已在 Conseil de Paris 做过首次发言。Paris 市政总督察发表过一份对市政府处理性侵案件方式的严厉批评报告。但回答始终一样:「<span class="annot" data-pop="risque0">零风险不存在 · <em class="fr">Le risque zéro n’existe pas</em><sup>*</sup></span><div class="annot-text" id="risque0"><strong>« Le risque zéro n’existe pas »</strong> — 法国官方话术经典 deflect 句式，字面「零风险不存在」。在事故、丑闻或公共失误发生后，被官员反复用来推卸预防责任、把责任问题转化为哲学性的「风险总归存在」论调。其修辞效果是把具体过失抽象化为「人类局限性」,从而消解可问责的对象。Elkrief 在这里以引号原样标出，正是要让读者意识到这一标准句式被用作系统性免责工具。</div>⁠。」</p>
+
+    <blockquote class="lead">
+      <div class="zh">十一年的无作为、被动、十一年的「调岗惩罚」── 被举报者只是换一所机构。</div>
+      <div class="sep"></div>
+      <div class="fr">«&nbsp;Onze ans d’inaction, de passivité et de mutations-sanctions pour les personnes signalées.&nbsp;»</div>
+      <div class="src">— Ruth Elkrief</div>
+    </blockquote>
+
+    <p>十一年的无作为、被动、十一年的<span class="annot" data-pop="mutsanc">「调岗-惩罚」 · <em class="fr">mutations-sanctions</em><sup>*</sup></span><div class="annot-text" id="mutsanc"><strong>mutation-sanction</strong> — 法国行政人事管理术语，字面「调岗作为惩罚」。指对被举报或确认过失的雇员，既不解雇也不彻底追究，而是把他/她调到另一个岗位或机构 ── 名义上是「行政处分」,实质上是把问题转嫁给下一个机构。在儿童保护语境下，这一做法被广泛批评为系统性帮凶:被举报的指导员从一所学校换到另一所学校，加害行为得以延续。Elkrief 在此处的措辞 <em class="fr">mutations-sanctions</em> 是反讽连字符 ── 名为惩罚，实为庇护。</div>对待被举报者 ── 他们只是换了机构。为什么所有其他、并非 Paris 而是承担全国性责任的政治家，没有一个抓住这场悲剧?协会拉响过警报、市政选举的候选人抓住过这一议题。他们陈述了事实、表达了责难。这恐怕是少见的一种情况:这样一桩丑闻，竟然没有引发任何政治制裁。</p>
+
+    <p>当然，虐待儿童的现象超越了 Paris 环城路<span class="annot" data-pop="periph"><sup>*</sup></span><div class="annot-text" id="periph"><strong>périphérique de Paris</strong> — 巴黎环城路，1973 年通车的 35 公里环线高速公路。在法国政治话语中，「péri périphérique」具有强烈的象征边界意义:环内是 Paris 内部、政治传媒精英的世界;环外则代表「真正的法国」、外省、普通生活。Elkrief 此处「dépasse le périphérique parisien · 超越巴黎环城路」是一种政治话语习惯用法，意指「问题不只在 Paris」── 但同时也微妙地承认，Paris 内部的丑闻确实有其特殊的政治权力结构议题。</div>⁠。但这些再次当选的市政负责人，先是说「孤立个案」「不可避免的祸患」、然后才表达遗憾与些许谦卑 ── 这能让人听得进去吗?今天，Emmanuel Grégoire 想要展示自己认真对待此事。他在 2015 年时为 <span class="annot" data-pop="drh">Anne Hidalgo 副手中分管人力资源的副市长<sup>*</sup></span><div class="annot-text" id="drh"><strong>Grégoire 2015 年的市政职务</strong> — Emmanuel Grégoire 2026 年 3 月当选 Paris 市长(以 50.52% 击败 Rachida Dati 41.52%、Sophia Chikirou 7.96%, 继任 Anne Hidalgo)。此前曾任 Hidalgo 副手:2014 年起任副市长(<em class="fr">adjoint au maire</em>⁠),早期分管人力资源等事务;2018-2024 年任第一副市长(<em class="fr">premier adjoint</em>⁠),2024 年因法国 <em class="fr">cumul des mandats</em> 限制辞任副市长以转任国民议会议员。Elkrief 在原文里特意点明 Grégoire「2015 年是人力资源负责人」,并以「11 年的 mutations-sanctions(调岗-惩罚)」开头 ── 这种带时间锚定的措辞在 chronique 体裁中通常用于建立责任时间线，把当前提议 2000 万欧元整改预算的 Grégoire,与其 11 年前主管人力资源时的位置联系起来。</div>⁠。他提议 2000 万欧元预算用于重新设计校外活动并提升招聘安全。</p>
+
+    <p>但要恢复信任，难道不应该按层级、按时间节点，把失能问题的责任清清楚楚摊开吗?如果一个人在自己的行政机构出了差错时不进行自我检讨，政治责任又有什么意义?自 2013 年<span class="annot" data-pop="rythmes">学校作息制度改革<sup>*</sup></span><div class="annot-text" id="rythmes"><strong>rythmes scolaires de 2013</strong> — 2013 年 Vincent Peillon(教育部长)推动的小学作息制度改革，把每周授课天数从 4 天恢复至 4.5 天，把课后时段下放给市镇负责组织「校外活动」(<em class="fr">activités périscolaires</em>⁠)。改革本身有教育学理据(让学习时段更均匀),但落地时被广泛批评:① 给市镇带来财政与组织负担、② 指导员资格门槛低且缺乏统一监管、③ 责任在 Ville(市政)/Éducation nationale(教育部)/État(中央)三方间被切碎。Elkrief 此处把这场改革指认为责任碎片化的制度根源 ── 各方都能把球踢给另一方。</div>以来，Ville(市政)、Éducation nationale(教育部)与 État(中央)三方间责任的碎片化，使得每一方都能把球踢给另一方。</p>
+
+    <p>周三，Emmanuel Grégoire 终于让步于在野党的要求:他同意成立一个关于校外活动管理的信息与评估专门委员会。一项儿童保护法案也将在国民议会接受审议。但对那些受到创伤的家庭来说，为时已晚。</p>
+  </article>
+  <div class="footer">
+    <div class="zh">
+      <strong>摘译自《Le Parisien Dimanche》</strong> · 2026 年 5 月 24 日 · N° 25426 bis<br>
+      原文参见:<em class="fr">kiosque.leparisien.fr</em> · 翻至 2026 年 5 月 24 日刊<br>
+      原文著作权归 Le Parisien libéré SAS 所有 — <em class="fr">Tous droits réservés</em><br>
+      本页为摘译稿，仅供个人法语学习。<br>
+      禁止任何商业用途、复制转载、改编、上传或二次出版页面内容。<br>
+      如需引用，请以《Le Parisien》原报道为准并标明出处。
+    </div>
+    <hr class="sep-line">
+    <div class="fr">
+      <strong>Extraits traduits du <em>Parisien Dimanche</em></strong> · 24 mai 2026 · N° 25426 bis<br>
+      Accès à l’édition originale : <em>kiosque.leparisien.fr</em> · naviguer au journal du 24 mai 2026<br>
+      Tous droits sur le texte original réservés à Le Parisien libéré SAS — <em>Tous droits réservés</em><br>
+      Cette page est une traduction à des fins personnelles d’apprentissage de la langue française.<br>
+      Toute utilisation commerciale, reproduction, adaptation, republication ou téléchargement du contenu est interdit.<br>
+      Pour toute citation, se référer à l’article original du <em>Parisien</em> et en mentionner la source.
+    </div>
+    <div class="claude-mark-end">Claude [Anthropic] 译</div>
+  </div>
+
+</div><!-- /container -->
+
+<a href="#" id="backtop" aria-label="回到顶部">↑</a>
+
+<script>
+  // Annotation toggle (global)
+  const annotBtn = document.getElementById('annotBtn');
+  const annotBtnLabel = document.getElementById('annotBtnLabel');
+  let notesOpen = false;
+  annotBtn.addEventListener('click', () => {
+    notesOpen = !notesOpen;
+    document.body.classList.toggle('notes-open', notesOpen);
+    annotBtnLabel.textContent = notesOpen ? 'Hide notes' : 'Notes';
+  });
+
+  // Individual annotation click
+  document.querySelectorAll('.annot').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const popId = el.getAttribute('data-pop');
+      const target = document.getElementById(popId);
+      if (target) target.classList.toggle('show');
+    });
+  });
+
+  // Close on click outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.annot') && !e.target.closest('.annot-text') && !notesOpen) {
+      document.querySelectorAll('.annot-text.show').forEach(el => el.classList.remove('show'));
+    }
+  });
+
+  // Back to top
+  const bt = document.getElementById('backtop');
+  window.addEventListener('scroll', () => {
+    bt.classList.toggle('show', window.scrollY > 600);
+  });
+  bt.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+</script>
+
+</body>
+</html>
